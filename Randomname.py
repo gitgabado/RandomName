@@ -26,9 +26,20 @@ def main():
             if st.button("Select a Random Winner"):
                 winner = random.choice(data.iloc[:, 0])
                 st.success(f"{winner} is the winner!")
-                st.image("trophy.png", caption="Congratulations!", use_column_width=True)
+                
+                # Load trophy image
+                trophy_img = "trophy.png"
+                
+                # Display winner name and trophy side by side
+                st.markdown(f"""
+                    <div style="display: flex; align-items: center;">
+                        <h2 style="margin: 0;">{winner} is the winner!</h2>
+                        <img src="{trophy_img}" width="50" height="50" style="margin-left: 10px;">
+                    </div>
+                """, unsafe_allow_html=True)
         else:
             st.error("Failed to load data.")
     
 if __name__ == "__main__":
     main()
+
