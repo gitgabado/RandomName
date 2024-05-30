@@ -26,6 +26,7 @@ def main():
             if st.button("Select a Random Winner"):
                 winner = random.choice(data.iloc[:, 0])
                 st.success(f"{winner} is the winner!")
+                st.image("trophy.png", caption="Congratulations!", use_column_width=True)
         else:
             st.error("Failed to load data.")
     
