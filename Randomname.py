@@ -2,14 +2,19 @@ import streamlit as st
 import pandas as pd
 import random
 import base64
+from PIL import Image
 
 def load_data(uploaded_file):
-    if uploaded_file.name.endswith('.csv'):
-        return pd.read_csv(uploaded_file)
-    elif uploaded_file.name.endswith('.xls') or uploaded_file.name.endswith('.xlsx'):
-        return pd.read_excel(uploaded_file)
-    else:
-        st.error("Unsupported file type. Please upload a .csv or .xls/.xlsx file.")
+    try:
+        if uploaded_file.name.endswith('.csv'):
+            return pd.read_csv(uploaded_file)
+        elif uploaded_file.name.endswith('.xls') or uploaded_file.name.endswith('.xlsx'):
+            return pd.read_excel(uploaded_file)
+        else:
+            st.error("Unsupported file type. Please upload a .csv or .xls/.xlsx file.")
+            return None
+    except Exception as e:
+        st.error(f"Error loading file: {e}")
         return None
 
 def get_image_as_base64(file_path):
@@ -47,3 +52,4 @@ def main():
     
 if __name__ == "__main__":
     main()
+
